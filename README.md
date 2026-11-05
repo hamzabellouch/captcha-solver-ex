@@ -2,6 +2,9 @@
 
 A modern, lightweight, privacy-first, on-device AI browser extension that empowers users—especially individuals with visual impairments and accessibility needs—to solve audio CAPTCHAs (reCAPTCHA v2 / Enterprise) 100% locally on their own computer using the Whisper speech recognition model via WebGPU and WebAssembly.
 
+<img width="6000" height="3375" alt="captcha-solver" src="https://github.com/user-attachments/assets/5f3c4404-cafe-4284-a0d0-940fabcbbe34" />
+
+
 Compatible with all major browsers: **Chrome, Brave, Edge, Opera, Vivaldi (Chromium-based)** and **Mozilla Firefox**.
 
 
