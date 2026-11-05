@@ -1,0 +1,35 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Editor and IDE directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build and package archives
+*.zip
+*.crx
+*.xpi
+*.tar.gz
+
+# Node / Python temp files
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.env.local
+
+# Logs and runtime metadata
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

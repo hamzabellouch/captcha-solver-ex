@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "Captcha solver",
+  "version": "1.0.0",
+  "description": "Accessibility tool: transcribes audio CAPTCHAs 100% on your device with local Whisper AI. Zero external APIs, zero tracking.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Captcha Solver (Alt+Shift+S)",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "permissions": ["storage", "offscreen"],
+  "host_permissions": [
+    "https://www.google.com/recaptcha/*",
+    "https://www.recaptcha.net/recaptcha/*"
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; connect-src 'self' https:; object-src 'self'"
+  },
+  "cross_origin_opener_policy": { "value": "same-origin" },
+  "cross_origin_embedder_policy": { "value": "require-corp" },
+  "web_accessible_resources": [
+    {
+      "resources": ["models/*", "ort/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/recaptcha/api2/anchor*",
+        "https://www.google.com/recaptcha/enterprise/anchor*",
+        "https://www.recaptcha.net/recaptcha/api2/anchor*",
+        "https://www.recaptcha.net/recaptcha/enterprise/anchor*",
+        "https://www.google.com/recaptcha/api2/bframe*",
+        "https://www.google.com/recaptcha/enterprise/bframe*",
+        "https://www.recaptcha.net/recaptcha/api2/bframe*",
+        "https://www.recaptcha.net/recaptcha/enterprise/bframe*"
+      ],
+      "js": ["content.js"],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "solve-captcha": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "Solve audio CAPTCHA with local AI"
+    }
+  },
+  "options_ui": { "page": "options.html", "open_in_tab": true }
+}

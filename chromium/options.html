@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Captcha Solver – Settings & Accessibility</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-hover: #1557b0;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --input-border: #cbd5e1;
+      --input-bg: #f8fafc;
+      --success: #1e8e3e;
+      --focus-ring: rgba(26, 115, 232, 0.2);
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      max-width: 620px;
+      margin: 36px auto;
+      padding: 0 16px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding: 0 4px;
+    }
+    .header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      background: #e6f4ea;
+      color: #137333;
+    }
+    /* Rounded Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.2s ease;
+    }
+    .card h2 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 16px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    label {
+      display: block;
+      margin: 14px 0 6px;
+      font-weight: 600;
+      font-size: 13.5px;
+      color: #334155;
+    }
+    /* Capsule Inputs and Dropdowns */
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px 18px;
+      border: 1.5px solid var(--input-border);
+      border-radius: 9999px; /* Capsule shape */
+      font-size: 13.5px;
+      background-color: var(--input-bg);
+      color: var(--text);
+      box-sizing: border-box;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+    }
+    select:focus, input[type="text"]:focus {
+      border-color: var(--primary);
+      background-color: #ffffff;
+      box-shadow: 0 0 0 4px var(--focus-ring);
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 8px 0;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-weight: normal;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    .checkbox-label:hover {
+      background-color: #f8fafc;
+    }
+    .checkbox-label input[type="checkbox"] {
+      margin-top: 3px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+    small {
+      display: block;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 26px;
+      padding: 0 4px;
+    }
+    /* Capsule Buttons */
+    button {
+      padding: 10px 22px;
+      border-radius: 9999px; /* Capsule shape */
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    button.primary {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 11px 28px; /* Capsule Save Settings button */
+      box-shadow: none;
+      transform: none;
+    }
+    button.primary:hover {
+      background: var(--primary-hover);
+      box-shadow: none;
+      transform: none;
+    }
+    button.primary:active {
+      background: var(--primary-hover);
+      box-shadow: none;
+      transform: none;
+    }
+    button.primary.saved {
+      background: var(--success);
+      color: #ffffff;
+      box-shadow: none;
+      transform: none;
+    }
+    button.primary.saved:hover {
+      background: #137333;
+      box-shadow: none;
+      transform: none;
+    }
+    button.secondary {
+      background: #ffffff;
+      color: #334155;
+      border: 1.5px solid var(--input-border);
+      padding: 9px 20px;
+    }
+    button.secondary:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+    .status-box {
+      margin-top: 14px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      background: #f1f5f9;
+      font-size: 13px;
+      color: var(--text);
+      border-left: 4px solid var(--primary);
+    }
+    .privacy-notice {
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="icons/icon-48.png" alt="Captcha Solver Logo" width="38" height="38" style="vertical-align: middle;">
+    <h1>Captcha Solver <span class="badge">New</span></h1>
+  </div>
+
+  <div class="card">
+    <h2>Accessibility & Automation</h2>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="autoSolve">
+      <div>
+        <strong>Auto-Solve CAPTCHA on Detection</strong>
+        <small>Automatically clicks "I'm not a robot", switches to audio challenge, and transcribes locally with AI—completely hands-free.</small>
+      </div>
+    </label>
+
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="humanCadence" checked>
+      <div>
+        <strong>Simulate Human Typing Cadence</strong>
+        <small>Enters digits with natural hesitation and keyboard events to prevent Google bot-detection blocks.</small>
+      </div>
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="showStatusBadge" checked>
+      <div>
+        <strong>Show Floating Status Badge</strong>
+        <small>Displays floating status capsules (e.g. "Transcribing locally...") during challenge solving.</small>
+      </div>
+    </label>
+  </div>
+
+  <div class="card">
+    <h2>Local AI</h2>
+
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 12px 16px; background: rgba(30, 142, 62, 0.08); border: 1px solid rgba(30, 142, 62, 0.22); border-radius: 12px; color: #1e8e3e; font-size: 13px; font-weight: 500;">
+      <span style="font-size: 16px;">⚡</span>
+      <span><strong>Whisper Tiny English (Offline Bundled):</strong> 100% pre-installed inside the extension files. High-accuracy English recognition, zero downloads, zero waiting, and works completely offline out-of-the-box.</span>
+    </div>
+
+    <label for="devicePref">Hardware Acceleration</label>
+    <select id="devicePref">
+      <option value="auto" selected>Auto – Recommended</option>
+      <option value="webgpu">WebGPU (Hardware GPU accelerated, sub-second)</option>
+      <option value="wasm">WebAssembly CPU (Universal compatibility)</option>
+    </select>
+    <small>WebGPU runs sub-second transcriptions on modern GPUs, with seamless WebAssembly CPU fallback.</small>
+  </div>
+
+  <div class="card privacy-notice">
+    <strong>Privacy & Offline Guarantee:</strong>
+    Everything runs inside your web browser. No API keys, no accounts, no advertisements, and zero tracking.
+  </div>
+
+  <div class="actions">
+    <button type="button" class="primary" id="save">Save Settings</button>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
